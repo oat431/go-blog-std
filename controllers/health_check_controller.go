@@ -8,7 +8,7 @@ import (
 )
 
 func HealthCheck(w http.ResponseWriter, r *http.Request) {
-	utils.SendJson(http.StatusBadGateway, w, res.HealthCheckDto{
-		Message: "Server is running",
+	utils.SendJson(w, res.HealthCheckDto{
+		Message: "pong",
 	})
 }
