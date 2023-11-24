@@ -17,6 +17,8 @@ func StartServer() {
 		w.Write([]byte("Welcome Eartling"))
 	})
 	r.Get("/ping", controllers.HealthCheck)
+	r.Get("/ping/{name}", controllers.HealthCheckWithParam)
+	r.Post("/ping", controllers.HealthCheckWithBody)
 
 	http.ListenAndServe(":8080", r)
 }
