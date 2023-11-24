@@ -12,13 +12,17 @@ func StartServer() {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 
-	// health check
+	// normal health check
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Welcome Eartling"))
+		w.Write([]byte("server is running"))
 	})
-	r.Get("/ping", controllers.HealthCheck)
-	r.Get("/ping/{name}", controllers.HealthCheckWithParam)
-	r.Post("/ping", controllers.HealthCheckWithBody)
+
+	// health check ping
+	r.Group(func(r chi.Router) {
+		r.Get("/ping", controllers.HealthCheck)
+		r.Get("/ping/{name}", controllers.HealthCheckWithParam)
+		r.Post("/ping", controllers.HealthCheckWithBody)
+	})
 
 	http.ListenAndServe(":8080", r)
 }
