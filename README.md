@@ -7,3 +7,6 @@
 - CRUD Blog
 - rating system
 - annonymous comment
+
+## Database
+- PostgreSQL
